@@ -251,7 +251,7 @@ data = web.DataReader(['XWD.TO', 'NQ=F'],'yahoo',start1,end1)['Adj Close']
 data["XWD.TO"] =  (data["XWD.TO"]/data["XWD.TO"].iloc[0])*100
 data["NQ=F"] =  (data["NQ=F"]/data["NQ=F"].iloc[0])*100
 
-actively_managed_fund = pd.read_excel("C:/Users/andre/OneDrive/Dokumente/Programmieren/python/projects/Finance/21_03_25 Zinsenszins_rechner/activly_managed_fund.xlsx")
+actively_managed_fund = pd.read_excel("C:/.../activly_managed_fund.xlsx")
 actively_managed_fund.index = actively_managed_fund.Date
 data['AMF'] = actively_managed_fund.Value
 data.dropna(axis=0, inplace=True)
