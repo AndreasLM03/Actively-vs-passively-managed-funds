@@ -292,7 +292,9 @@ for label, x, y in zip(returns.columns, returns.mean(), returns.std()):
 <img src= "RiskAnalysis.png" width="400">
 
 ````python
-data.plot()
+ax = data.plot()
+ax.set_xlabel("Date")
+ax.set_ylabel("Growth in %")
 ````
 <img src= "Chart.png" width="400">
 
