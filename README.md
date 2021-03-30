@@ -2,6 +2,13 @@
 Here I want to show how to download data of a managed fund from a dynamic graph from a website and then compare it with a passively managed index. Furthermore, I would like to perform a risk assessment.
 
 
+First, I want to download from a web page with an interactive chart the data.
+
+I would like to show a comparison between an active managed fund and a passive fund. As an actively managed fund I use the "Allianz AktivDepot Plus Chancenreich (https://de.allianzgi.com/de-de/unsere-fonds/allianz-aktiv-depot/profil-chancenreich)" Since the fund has no ISIN or WKN number, I will download the data from the interactive chart from an official website.
+
+
+
+
 
 
 ```` python
@@ -105,4 +112,15 @@ for x in range(0,12):
     fig.savefig(filename, bbox_inches='tight')
 ````
 
-
+<img src= "2010-04-15.png" width="800">
+<img src= "2011-01-01.png" width="800">
+<img src= "2012-01-01.png" width="800">
+<img src= "2013-01-01.png" width="800">
+<img src= "2014-01-01.png" width="800">
+<img src= "2015-01-01.png" width="800">
+<img src= "2016-01-01.png" width="800">
+<img src= "2017-01-01.png" width="800">
+<img src= "2018-01-01.png" width="800">
+<img src= "2019-01-01.png" width="800">
+<img src= "2020-01-01.png" width="800">
+<img src= "2021-01-01.png" width="800">
