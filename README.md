@@ -236,3 +236,8 @@ for x in range(0,12):
 <img src= "2019-01-01.png" width="800">
 <img src= "2020-01-01.png" width="800">
 <img src= "2021-01-01.png" width="800">
+
+
+# Conclusion
+
+The comparison presented here reveals that the actively managed fund has clearly lagged behind the MSCI World benchmark in recent years. The performance fees and purchase costs, which further worsen the result for the actively managed fund, have not yet been included.
