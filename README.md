@@ -1,7 +1,7 @@
 # Actively-vs-passively-managed-funds
 Here I want to show how to download data of a managed fund from a dynamic graph from a website and then compare it with a passively managed index. Furthermore, I would like to perform a risk assessment.
 
-# Download
+## Download
 First, I want to download from a web page with an interactive chart the data.
 
 I would like to show a comparison between an active managed fund and a passive fund. As an actively managed fund I use the "Allianz AktivDepot Plus Chancenreich (https://de.allianzgi.com/de-de/unsere-fonds/allianz-aktiv-depot/profil-chancenreich)" Since the fund has no ISIN or WKN number, I will download the data from the interactive chart from an official website.
@@ -11,11 +11,11 @@ I would like to show a comparison between an active managed fund and a passive f
 For this go to the page and change to the expert mode "CRT+F12" Here go into the Network mode, select XHR and reload the page again. I find the entry "fundperformance" and click on "Response", here now I see the data as text and save it as an Excel file ("C:/.../activly_managed_fund.xlsx").
 
 
-# Comparision
+## Comparision
 Now I would like to make a comparison with a passively managed fund, once over the total period and then each year
 
 
-## Total time period
+### Total time period
 
 ````python
 # Download passive managed fond
@@ -122,7 +122,7 @@ fig.tight_layout()
 
 
 
-## Annual comparison
+### Annual comparison
 ```` python
 Start = ['2010-04-15','2011-01-01','2012-01-01','2013-01-01','2014-01-01','2015-01-01','2016-01-01','2017-01-01','2018-01-01','2019-01-01','2020-01-01','2021-01-01']
 End = ['2010-12-31','2011-12-31','2012-12-31','2013-12-31','2014-12-31','2015-12-31','2016-12-31','2017-12-31','2018-12-31','2019-12-31','2020-12-31','2021-03-22',]
@@ -238,6 +238,65 @@ for x in range(0,12):
 <img src= "2021-01-01.png" width="800">
 
 
-# Conclusion
+## Risk Analysis
+In the further course I would still like to carry out a risk analysis. For this I look at the daily change of the price and plot the mean value related to the standard deviation in a diagram.
+
+
+````python
+#Risk-analysis
+
+start1 = '2010-04-15 00:00:00'
+end1 = '2020-12-31 00:00:00'
+data = web.DataReader(['XWD.TO', 'NQ=F'],'yahoo',start1,end1)['Adj Close']
+data["XWD.TO"] =  (data["XWD.TO"]/data["XWD.TO"].iloc[0])*100
+data["NQ=F"] =  (data["NQ=F"]/data["NQ=F"].iloc[0])*100
+
+actively_managed_fund = pd.read_excel("C:/Users/andre/OneDrive/Dokumente/Programmieren/python/projects/Finance/21_03_25 Zinsenszins_rechner/activly_managed_fund.xlsx")
+actively_managed_fund.index = actively_managed_fund.Date
+data['AMF'] = actively_managed_fund.Value
+data.dropna(axis=0, inplace=True)
+data
+
+## daily returns
+daily_returns = data.pct_change()
+
+## Correlation-diagramm (corrplot)
+daily_returns_corr = daily_returns.corr()
+#daily_returns_corr
+
+## Risk analysis
+returns = daily_returns.dropna()
+#returns.head(5)
+
+sns.heatmap(daily_returns_corr.dropna(),annot=True)
+````
+<img src= "Corr.png" width="800">
+
+The Daily Change correlate between Nasdaq and MSCI World is quite strong, but the actively managed fund has only a low correlation.
+
+
+````python
+plt.scatter(returns.mean(), returns.std(),alpha = 0.5,s =np.pi*20)
+plt.ylim([returns.std().min()*(0.95), returns.std().max()*(1.05)])
+plt.xlim([returns.mean().min()*(0.95), returns.mean().max()*(1.05)])
+plt.xlabel('Expected returns')
+plt.ylabel('Risk')
+
+for label, x, y in zip(returns.columns, returns.mean(), returns.std()):
+    plt.annotate(
+        label, 
+        xy = (x, y), xytext = (5, 5),
+        textcoords = 'offset points', ha = 'left', va = 'bottom')
+````
+
+<img src= "RiskAnalysis.png" width="800">
+
+One can see that the actively managed fund exudes low risk, but the expected return lags significantly behind the MSCI World and the NASDAQ
+
+## Conclusion
 
 The comparison presented here reveals that the actively managed fund has clearly lagged behind the MSCI World benchmark in recent years. The performance fees and purchase costs, which further worsen the result for the actively managed fund, have not yet been included.
+
+
+
+
