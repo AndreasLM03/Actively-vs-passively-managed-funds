@@ -270,7 +270,7 @@ returns = daily_returns.dropna()
 
 sns.heatmap(daily_returns_corr.dropna(),annot=True)
 ````
-<img src= "Corr.png" width="800">
+<img src= "Corr.png" width="400">
 
 The Daily Change correlate between Nasdaq and MSCI World is quite strong, but the actively managed fund has only a low correlation.
 
@@ -289,7 +289,7 @@ for label, x, y in zip(returns.columns, returns.mean(), returns.std()):
         textcoords = 'offset points', ha = 'left', va = 'bottom')
 ````
 
-<img src= "RiskAnalysis.png" width="800">
+<img src= "RiskAnalysis.png" width="400">
 
 One can see that the actively managed fund exudes low risk, but the expected return lags significantly behind the MSCI World and the NASDAQ
 
