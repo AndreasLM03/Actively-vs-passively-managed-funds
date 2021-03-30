@@ -291,7 +291,16 @@ for label, x, y in zip(returns.columns, returns.mean(), returns.std()):
 
 <img src= "RiskAnalysis.png" width="400">
 
+````python
+data.plot()
+````
+<img src= "Chart.png" width="400">
+
 One can see that the actively managed fund exudes low risk, but the expected return lags significantly behind the MSCI World and the NASDAQ
+
+
+
+
 
 ## Conclusion
 
